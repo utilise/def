@@ -15,4 +15,16 @@ describe('def', function() {
     expect(o.a).to.eql(6)
   })
 
+  it('should define property on host if shadow', function() {
+    var o = { host: { nodeName: 'div' }}
+    def(o, 'api', 'yes')
+    expect(o.host.api).to.eql('yes')
+  })
+
+  it('should use function name if available', function() {
+    var o = {}
+    def(o, function api(){})
+    expect(o.api).to.be.a('function')
+    o.api()
+  })
 })
